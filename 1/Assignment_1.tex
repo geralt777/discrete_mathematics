@@ -1,0 +1,386 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,graphicx,url}
+\usepackage{fullpage}
+
+
+% Old Stuff
+%%\oddsidemargin=0.15in
+%%\evensidemargin=0.15in
+%%\topmargin=-.5in
+%%\textheight=9in
+%%\textwidth=6.25in
+
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\textwidth}{6.25in}
+\setlength{\topmargin}{-0.4in}
+\setlength{\textheight}{8.5in}
+
+\newcommand{\heading}[5]{
+   \renewcommand{\thepage}{\arabic{page}}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{
+    \hbox to 6.2in { {\bf CSE/AMS 547 Discrete Mathematics}
+     	 \hfill #2 }
+       \vspace{4mm}
+       \hbox to 6.2in { {\Large \hfill #5  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.2in { {\it #3 \hfill #4} }
+      }
+   }
+   \end{center}
+   \vspace*{4mm}
+}
+
+\newcommand{\handout}[3]{\heading{#1}{#2}{Instructor:
+David Gu}{}{#3}}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{0.1in}
+
+\begin{document}
+\handout{2}{September 01, 2017}{Academic Honesty Review}
+
+\textbf{Sharad Sridhar - 111492675}
+
+\textbf{Due by Monday, Sep. 25, 11:59pm.}
+
+\medskip
+\medskip
+
+\noindent
+{\bf Problem 1.10
+}
+
+\textit {Given:}
+
+$Q_n$ - the minimum number of moves needed to transfer a tower of n disks from A to B if all moves must be clockwise
+
+$R_n$ - the minimum number of moves needed to transfer a tower of n disks from B back to A if all moves must be clockwise
+
+The only moves allowed are $A\rightarrow B$, $B\rightarrow C$, and $C\rightarrow A$, where $C$ is the temporary tower.
+
+\medskip
+\textit {To Prove:}
+
+$Q_n$ = $\left\{ \begin{tabular}{ccc}
+  0, & if $n=0$ \\
+  $2R_{n-1} + 1$, & if $n>0$
+  \end{tabular} \right\}$
+
+$R_n$ = $\left\{ \begin{tabular}{ccc}
+  0, & if $n=0$ \\
+  $Q_n + Q_{n-1} + 1$, & if $n>0$
+  \end{tabular} \right\}$
+
+\medskip
+
+\textit {Solution:}
+\medskip
+
+{\bf 1.} $Q_0 = 0$ : This follows from the fact that if there are no disks, there won't be any moves required.
+
+{\bf 2.} Similarly, $R_0=0$
+
+\medskip
+
+{\bf 3.} $Q_1 = 1$ : The number of moves required to transfer 1 disk from A to B (Since we can move the disks directly)
+
+{\bf 4.} $R_1 = 1 + 1$ : Moving the disk from B to A is done $B\rightarrow C\rightarrow A$
+
+{\bf 5. Transferring n disks from A to B: }{If the rules are the same as that of the Tower of Hanoi problem, we can proceed as follows:}
+
+\textit {5.1 -} We first transfer the first $n-1$ disks to a temporary tower, say 'C'. We know that $A\rightarrow C$ is not allowed directly, and neither is $B\rightarrow A$. So, transferring disks from $A\rightarrow C$ is similar to transferring disks from $B\rightarrow A$. From the given information, this is done in ${\bf R_{n-1}}$ moves.
+
+\textit {5.2 -} We then transfer the $n^{th}$ disk from tower A to tower B in {\bf {1}} move. We have seen earlier in step 1 that $Q_1 = 1$.
+
+\textit {5.3 -} We then transfer the initial $n-1$ disks from C to B. As shown in step 5.1, it is not a direct move and similar in nature to the move $B\rightarrow A$. As before, this takes another ${\bf R_{n-1}}$ moves.
+
+\textit {5.4 -} If we add the moves from the previous 3 steps, we get a total of ${\bf R_{n-1}}+\bf {1}+{\bf R_{n-1}} = {\bf 2R_{n-1}}+ {\bf {1}} = {\bf Q_n}$ steps. This is the required result.
+
+{\bf 6. Transferring n disks from B to A: } {We proceed as follows}
+
+\textit {6.1 -} similar to the previous approach, we now transfer $n-1$ disks from $B\rightarrow C$ in $X$ steps.
+
+\textit {6.2 -} Now, we cannot directly transfer the $n^{th}$ disk from $B\rightarrow A$. We must move it to $C$ first, but that can only be done when $C$ is empty, since the $n^{th}$disk is the largest. So, we move the $n-1$ disks from $C\rightarrow A$ in $Y$ steps. Since we are transferring $n-1$ disks from $B$ to $A$, we can use the given information to see that the minimum steps required is $\bf {R_{n-1}}$.
+
+\textit {6.3 -} We then transfer the $n^{th}$ disk from $B$ to $C$ in $\bf {1}$ move.
+
+\textit {6.4 -} We then transfer the $n-1$ disks from $A$ to $B$ in $\bf {Q_{n-1}}$ moves.
+
+\textit {6.5 -} We then transfer the $n^{th}$ disk from $C$ to $A$ in $\bf {1}$ move.
+
+\textit {6.6 -} Now we transfer the remaining $n-1$ disks from $B$ to $A$ in $\bf {R_{n-1}}$ moves.
+
+\textit {6.7 -} We add the above moves to get a total of $\bf {R_{n-1}} + 1 + \bf {Q_{n-1}} + 1 + \bf {R_{n-1}} = \bf {2R_{n-1}} + 1 + 1 + \bf {Q_{n-1}} = \bf {R_n}$.
+
+\textit {6.8 -} If we substitute the result ${\bf 2R_{n-1}}+ {\bf {1}} = {\bf Q_n}$ from step $5.4$ in the previous step, we get : $\bf {R_n = Q_n + Q_{n-1} + 1}$. This is the required result.
+
+\medskip
+\medskip
+
+\noindent
+{\bf Problem 1.14}
+
+\textit {Solution:}
+
+{\bf 1. } Without any planes there is only $1$ part, which is the initial piece itself. So, $P_0 = 1$
+
+{\bf 2. } A single plane will always divide a 3D region into two parts. So, $P_1 = 2$.
+
+{\bf 3. } Let us assume that the piece of cheese is a cube and add another plane to divide it. We can either add the new plane parallel to the existing plane, or add it in such a way that the two plane intersect. A parallel plane would create an extra region resulting in a total of 3 parts. But in the other case, when they intersect, a total of 4 parts is created. This is the maximum number of parts that can be created by $2$ planes, so, $P_2 = 4$. Thus, the maximum output value is obtained when the new plane intersects each of the existing planes.
+
+{\bf 4. } In order to visualize the addition and intersection of more planes, we can, for now, look at a face of the cube. This is in a shape of a square. And say, if we only added planes that are perpendicular to that face, we would see an intersection of lines on a $2d$ plane. In essence, this problem boils down to a line intersection problem with the added component of the new number of areas created by the introduction of a new plane. For example, in case of two planes, when the two planes intersect, we can take a look at a single plane from a 2d point of view to see one line (which is the 2nd plane) intersecting the plane into two.
+
+{\bf 5.} We know that the number of regions created by lines intersecting each other is given by $L_n = S_n + 1$, where $S_n = n(n+1)/2$.
+
+{\bf 6.} Thus, a new plane intersecting the old planes will create $P_n = P_{n-1} + L_{n-1}$ new regions.
+
+{\bf 7. Now to calculate $P_5$,}
+
+\textit {7.1 -} $P_1 = 2, P_2 = 4$
+
+\textit {7.2 -} $P_3 = P_2 + L_2 = 4 + 4 = 8$
+
+\textit {7.3 -} $P_4 = P_3 + L_3 = 8 + 7 = 15$
+
+\textit {7.4 -} $P_5 = P_4 + L_4 = 15 + 11 = {\bf 26}$, which is the required answer
+
+\noindent
+{\bf Problem 1.16}
+
+\textit {Given:}
+
+$g(1) = \alpha$
+
+$g(2n+j) = 3g(n)+\gamma n+\beta _j$, for $j=0,1$ and $n\geq 1$
+
+\textit {Solution:}
+
+General form of the equation $g(n) = \alpha A(n) + \beta _0 B(n) + \beta _1 C(n) + \gamma D(n) +$
+
+{\bf 1.} Say, $g(n) = 1$
+
+{\textit {1.1}} $g(1) = 1 = \alpha$
+
+{\textit {1.2}} $g(2) = g(2*1 + 0) = 3+ \gamma + \beta _0 = 1$. 
+So, $\gamma + \beta _0 = -2$
+
+{\textit {1.3}} $g(3) = g(2*1 + 1) = 3+ \gamma + \beta _1 = 1$.
+So, $\gamma + \beta _1 = -2$
+
+{\textit {1.4}} $g(4) = g(2*2 + 0) = 3+ 2\gamma + \beta _0 = 1$.
+So, $2\gamma + \beta _0 = -2$
+
+{\textit {1.5}} Solving the 4 equations, we get the values of $\alpha = 1$, $\gamma = 0$, $\beta _0 = -2$, and $\beta _1 = -2$
+
+{\textit {1.6}} We get the equation of the form : $A(n)-2B(n)-2C(n) = 1$
+
+{\bf 2.} Say, $g(n) = n$
+
+{\textit {2.1}} $g(1) = 1 = \alpha$
+
+{\textit {2.2}} $g(2) = g(2*1 + 0) = 3+ \gamma + \beta _0 = 2$.
+So, $\gamma + \beta _0 = -1$
+
+{\textit {2.3}} $g(3) = g(2*1 + 1) = 3+ \gamma + \beta _1 = 3$.
+So, $\gamma + \beta _1 = 0$
+
+{\textit {2.4}} $g(4) = g(2*2 + 0) = 6+ 2\gamma + \beta _0 = 4$.
+So, $2\gamma + \beta _0 = -2$
+
+{\textit {2.5}} Solving the 4 equations, we get the values of $\alpha = 1$, $\gamma = -1$, $\beta _0 = 0$, and $\beta _1 = 1$
+
+{\textit {2.6}} We get the equation of the form : $A(n)+C(n)-D(n) = n$
+
+{\bf 3.} Say, $g(n) = n^2$
+
+{\textit {3.1}} $g(1) = 1 = \alpha$
+
+{\textit {3.2}} $g(2) = g(2*1 + 0) = 3+ \gamma + \beta _0 = 4$.
+So, $\gamma + \beta _0 = 1$
+
+{\textit {3.3}} $g(3) = g(2*1 + 1) = 3+ \gamma + \beta _1 = 9$.
+So, $\gamma + \beta _1 = 6$
+
+{\textit {3.4}} $g(4) = g(2*2 + 0) = 12+ 2\gamma + \beta _0 = 16$.
+So, $2\gamma + \beta _0 = 4$
+
+{\textit {3.5}} Solving the 4 equations, we get the values of $\alpha = 1$, $\gamma = 3$, $\beta _0 = -2$, and $\beta _1 = 3$
+
+{\textit {3.6}} We get the equation of the form : $A(n)-2B(n)+3C(n)+3D(n) = n^2$
+
+....Unable to proceed further....
+
+\noindent
+{\bf Problem 1.21}
+
+\textit {Given:}
+
+Variation of the Josephus problem with 2n people in a circle and the first $n$ people as good guys and the rest bad.
+
+\medskip
+\textit {To Show:}
+
+There is always an integer $M$ depending on $N$ such that if we execute the $M^{th}$ person in the circle, the bad guys are the first to go.
+
+\medskip
+
+\textit {Solution:}
+\medskip
+
+{\bf 1.} We can note that in order to remove the bad guys first, the $m^{th}$ person cannot be $<= n$, since all the good guys are $<=n$. Thus $m>n$ is quite obvious.
+
+{\bf 2.} If we take an example of $n=2$, which leaves us 4 people to deal with, we see that in the first round, either the $3^{rd}$ or $4^{th}$ person must be eliminated. Say, if $m = 3$ or $m = 4$, we will end up eliminating a good guy before all the bad guys are removed. But still, even if $m>n$, it must still remove all bad guys before a good guy. If $x$ rounds are made, $m$ must still point to a member of the $2^{nd}$ half of people.
+
+{\bf 3.} One way the above should hold true is when $m$ is a multiple of one of $[n+1, n+2....2n]$. But this is not true always, as can be seen when $n=2$ and $m=6$. Person $2$ gets eliminated before $4$.
+
+{\bf 4.} A stronger rule would be to have $m$ be a multiple of all of $[n+1, n+2....2n]$. This would always work because during every round, the last guy (who is bad) will be removed until there are no more bad guys left (which should be after $n$ rounds). After every round, when one guy gets removed, the $m^{th}$ guy would still be the last guy since $m$ is also a multiple of $2n-1$.
+
+{\bf 5.} Thus, $m=LCM(n+1, n+2, ... , 2n)$, would be a value that results in the elimination of all the bad guys first.
+
+
+\noindent
+{\bf Problem 2.14}
+
+\textit {Solution:}
+
+{\bf 1.} In order to separate the given form $\sum_{k=1}^{n} k2^k$, we must find out a representation of $k$.
+
+{\bf 2.} $k$ can be represented as $\sum_{j=1}^{k} 1$.
+
+{\bf 3.} We can rewrite it as : \begin{equation}\label{eq1}
+                                  \begin{split}
+                                     \sum\limits_{1\leq k\leq n} k2^k & = \sum\limits_{1\leq k\leq n} 2^k * \sum\limits_{1\leq j\leq k} 1 \\
+                                       & =\sum\limits_{1\leq j\leq k\leq n} 2^k \\
+                                       & =\sum\limits_{1\leq j\leq n} \sum\limits_{j\leq k\leq n} 2^k \\
+                                  \end{split}
+                                \end{equation}
+\medskip
+{\bf 4.} The double sum is now solved first over $k$, ie., $j\leq k\leq n$. We also split the total sum over $[1...n]$ as the sum of the first $j$ values and the next $n-j$ values. The value being the result of a geometric progression, we can make use of the knowledge that $\sum\limits_{j=1}^{n} 2^j = \frac{2^{n+1} - 2}{2-1}$
+\begin{equation}\label{eq1}
+                                  \begin{split}
+                                     \sum\limits_{j\leq k\leq n} 2^k & = \sum\limits_{1\leq k\leq n} 2^k - \sum\limits_{1\leq k< j} 2^k \\
+                                       & =2^{n+1} - 2 - (2^{j} - 2) \\
+                                       & =2^{n+1} - 2^j \\
+                                  \end{split}
+                                \end{equation}
+
+{\bf 5.} We now sum this result over j to get the final result: \begin{equation}\label{eq1}
+                                  \begin{split}
+                                     \sum\limits_{1\leq j\leq n} 2^{n+1} - 2^j & = n2^{n+1} - (2^{n+1} -2) \\
+                                       & = n2^{n+1} - 2^{n+1} + 2\\
+                                  \end{split}
+                                \end{equation}
+
+\medskip
+
+\noindent
+{\bf Problem 2.21}
+
+{\textit {Solution: - } We will use the perturbation method as required.}
+
+{\bf 1. $S_n = \sum\limits_{k=0} ^{n} (-1)^{n-k}$}
+
+{\textit {1.1} }It follows that $S_{n+1} = \sum\limits_{k=0} ^{n+1} (-1)^{n+1-k}$, when we replace n with n+1.
+
+{\textit {1.2}} Evaluation of $S_{n+1}$ by splitting it for the first term :
+\begin{equation}\label{eq2}
+                                  \begin{split}
+                                     \sum\limits_{k=0}^{n+1} (-1)^{n+1-k} & = (-1)^{n+1-0} + \sum\limits_{1\leq k\leq n+1} (-1)^{n+1-k}\\
+                                       & =(-1)^{n+1} + \sum\limits_{1\leq k+1\leq n+1} (-1)^{n+1-(k+1)} \\
+                                       & =(-1)^{n+1} + \sum\limits_{0\leq k\leq n} (-1)^{n-k}\\
+                                       & =(-1)^{n+1} + S_n\\
+                                  \end{split}
+                                \end{equation}
+
+{\textit {1.3}} Evaluation of $S_{n+1}$ by splitting it for the last term :
+\begin{equation}\label{eq3}
+                                  \begin{split}
+                                     \sum\limits_{k=0}^{n+1} (-1)^{n+1-k} & = \sum\limits_{0\leq k\leq n} (-1)^{n+1-k} + (-1)^{(n+1) - (n+1)}\\
+                                       & =\sum\limits_{0\leq k\leq n} (-1)^{n+1-k} + (-1)^{0} \\
+                                       & =(-1) * \sum\limits_{0\leq k\leq n} (-1)^{n-k} + 1\\
+                                       & =1 - S_n\\
+                                  \end{split}
+                                \end{equation}
+
+{\textit {1.4}} Solving the two equations, we get $2S_n = 1 - (-1)^{n+1}$
+
+{\textit {1.5}} Thus, {\bf $S_n = \frac{1 - (-1)^{n+1}}{2}$ }
+
+{\bf 2. $T_n = \sum\limits_{k=0} ^{n} (-1)^{n-k}k$}
+
+{\textit {2.1} }It follows that $T_{n+1} = \sum\limits_{k=0} ^{n+1} (-1)^{n+1-k}k$, when we replace n with n+1.
+
+{\textit {2.2}} Evaluation of $T_{n+1}$ by splitting it for the first term :
+\begin{equation}\label{eq4}
+                                  \begin{split}
+                                     \sum\limits_{k=0} ^{n+1} (-1)^{n+1-k}k & = (-1)^{n+1-0} * 0 + \sum\limits_{1\leq k\leq n+1} (-1)^{n+1-k}k\\
+                                       & =0 + \sum\limits_{1\leq k+1\leq n+1} (-1)^{n+1-(k+1)}(k+1) \\
+                                       & =\sum\limits_{0\leq k\leq n} (-1)^{n-k}k + \sum\limits_{0\leq k\leq n} (-1)^{n-k}\\
+                                       & =T_n + S_n\\
+                                  \end{split}
+                                \end{equation}
+
+{\textit {2.3}} Evaluation of $T_{n+1}$ by splitting it for the last term :
+\begin{equation}\label{eq5}
+                                  \begin{split}
+                                     \sum\limits_{k=0}^{n+1} (-1)^{n+1-k} & = \sum\limits_{k=0} ^{n+1} (-1)^{n+1-k}k + (-1)^{n+1-(n+1)}(n+1)\\
+                                       & =(-1)\sum\limits_{k=0} ^{n} (-1)^{n-k}k + n+1 \\
+                                       & =n+1-T_n\\
+                                  \end{split}
+                                \end{equation}
+
+{\textit {2.4}} Solving the two equations, we get $2T_n = n+1 - S_n$
+
+{\textit {2.5}} Thus, {\bf $T_n = \frac{n+1 -S_n}{2}$ }
+
+
+{\bf 3. $U_n = \sum\limits_{k=0} ^{n} (-1)^{n-k}k^2$}
+
+{\textit {3.1} }It follows that $U_{n+1} = \sum\limits_{k=0} ^{n+1} (-1)^{n+1-k}k^2$, when we replace n with n+1.
+
+{\textit {3.2}} Evaluation of $U_{n+1}$ by splitting it for the first term :
+\begin{equation}\label{eq6}
+                                  \begin{split}
+                                     \sum\limits_{k=0} ^{n+1} (-1)^{n+1-k}k^2 & = (-1)^{n+1-0} * 0 + \sum\limits_{1\leq k\leq n+1} (-1)^{n+1-k}k^2\\
+                                       & =0 + \sum\limits_{1\leq k+1\leq n+1} (-1)^{n+1-(k+1)}(k+1)^2 \\
+                                       & =0 + \sum\limits_{1\leq k+1\leq n+1} (-1)^{n-k}(k^2+2k+1) \\
+                                       & =\sum\limits_{0\leq k\leq n} (-1)^{n-k}k^2 + 2\sum\limits_{0\leq k\leq n} (-1)^{n-k}k + \sum\limits_{0\leq k\leq n} (-1)^{n-k}\\
+                                       & =U_n+2T_n + S_n\\
+                                  \end{split}
+                                \end{equation}
+
+{\textit {3.3}} Evaluation of $U_{n+1}$ on by splitting it for the last term :
+\begin{equation}\label{eq7}
+                                  \begin{split}
+                                     \sum\limits_{k=0} ^{n+1} (-1)^{n+1-k}k^2 & = \sum\limits_{k=0} ^{n+1} (-1)^{n+1-k}k^2 + (-1)^{n+1-(n+1)}(n+1)^2\\
+                                       & =(-1)\sum\limits_{k=0} ^{n} (-1)^{n-k}k^2 + (n+1)^2 \\
+                                       & =-U_n + (n+1)^2\\
+                                  \end{split}
+                                \end{equation}
+
+{\textit {3.4}} Solving the two equations, we get $2U_n = (n+1)^2 - S_n - 2T_n = (n+1)^2 - (n+1-S_n) - S_n$
+
+{\textit {3.5}} Thus, {\bf $U_n = \frac{n^2+n}{2}$ }
+
+\medskip
+
+\noindent
+{\bf Problem 2.28}
+
+\textit {Solution:}
+
+We can see that in the third step, due to the interchanging of j and k in the sum limits, the term of the sum actually approaches $\infty$, in the event that $k>j$. The series is no longer convergent due to this step.
+
+\end{document}
+
+
+
+
+
+
+
+

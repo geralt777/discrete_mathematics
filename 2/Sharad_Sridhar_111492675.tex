@@ -1,0 +1,331 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts,amsmath,amssymb,graphicx,url}
+\usepackage{fullpage}
+
+
+% Old Stuff
+%%\oddsidemargin=0.15in
+%%\evensidemargin=0.15in
+%%\topmargin=-.5in
+%%\textheight=9in
+%%\textwidth=6.25in
+
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\textwidth}{6.25in}
+\setlength{\topmargin}{-0.4in}
+\setlength{\textheight}{8.5in}
+
+\newcommand{\heading}[5]{
+   \renewcommand{\thepage}{\arabic{page}}
+   \noindent
+   \begin{center}
+   \framebox{
+      \vbox{
+    \hbox to 6.2in { {\bf CSE/AMS 547 Discrete Mathematics}
+     	 \hfill #2 }
+       \vspace{4mm}
+       \hbox to 6.2in { {\Large \hfill #5  \hfill} }
+       \vspace{2mm}
+       \hbox to 6.2in { {\it #3 \hfill #4} }
+      }
+   }
+   \end{center}
+   \vspace*{4mm}
+}
+
+\newcommand{\handout}[3]{\heading{#1}{#2}{Instructor:
+David Gu}{}{#3}}
+
+\setlength{\parindent}{0in}
+\setlength{\parskip}{0.1in}
+
+\begin{document}
+\handout{2}{October 23, 2017}{Homework 2}
+
+\textbf{Sharad Sridhar - 111492675}
+
+\textbf{Due by Monday, Oct. 23, 11:59pm.}
+
+\medskip
+\medskip
+
+\noindent
+{\bf Problem 2.22}
+
+\textit {Given :}
+
+Prove Lagrange's Identity (without induction)
+
+\textit {Solution :}
+
+{\bf 1. }Splitting the original and using the distributive law, we get :
+
+\begin{equation}\label{eq1}
+  \begin{split}
+     \sum\limits_{1 \leq j < k \leq n}^{} (a_jb_k - a_kb_j)^2  = {\sum\limits_{1 \leq j < k \leq n}^{} (a_jb_k)^2} - {2 \sum\limits_{1 \leq j < k \leq n}^{} (a_jb_ka_kb_j)} + {\sum\limits_{1 \leq j < k \leq n}^{} (a_kb_j)^2}
+  \end{split}
+\end{equation}
+
+{\bf 2.} The first and last terms are the sums of terms when $j \neq k$, ie. $\sum\limits_{1 \leq j \neq k \leq n}^{} (a_jb_k)^2$
+
+{\bf 3. } Using a similar logic, we can split the $2^{nd}$ term and notice that two parts are of the same form as that of the previous step. There is only a change in the ordering of the terms. So, we can write it as $j \neq k$, ie. $\sum\limits_{1 \leq j \neq k \leq n}^{} (a_jb_ka_kb_j)^2$
+
+{\bf 4. }To get the final equation as required, we need both j and k going from 1 to n (of the form $1 \leq j,k \leq n$), and to achieve the split we have to consider the cases where j=k.
+
+{\bf 5. } We see that whenever j=k, the previous two terms are equal, ie. both are : $\sum\limits_{1 \leq j \leq n}^{} (a_j)^2(b_j)^2 $. As these two cancel out, we can use them in the equation to change the limits.
+
+{\bf 6.} The equation that we get is as follows :
+\begin{equation}\label{eq2}
+  \begin{split}
+     {\sum\limits_{1 \leq j \neq k \leq n}^{} (a_jb_k)^2} - {\sum\limits_{1 \leq j \neq k \leq n}^{} (a_jb_ka_kb_j)^2} & = {\sum\limits_{1 \leq j , k \leq n}^{} (a_jb_k)^2} - {\sum\limits_{1 \leq j , \leq n}^{} (a_jb_ka_kb_j)^2} \\
+     & = {\sum\limits_{1 \leq j \leq n}^{} (a_j)^2}{\sum\limits_{1 \leq j \leq n}^{} (b_j)^2} - {\sum\limits_{1 \leq j \leq n}^{} (a_jb_j)}{\sum\limits_{1 \leq k \leq n}^{} (a_kb_k)} \\
+     & = {\sum\limits_{1 \leq k \leq n}^{} (a_k)^2}{\sum\limits_{1 \leq k \leq n}^{} (b_k)^2} - ({\sum\limits_{1 \leq k \leq n}^{} (a_kb_k)})^2
+  \end{split}
+\end{equation}
+
+which is the required result. For the second part of the question, 
+
+$\sum\limits_{1 \leq j < k \leq n}^{} {(a_jb_k - a_kb_j)(A_jB_k - A_kB_j)}$
+
+we can expand the given equation to get the four distinct terms : $a_jA_jb_kB_k$, $a_jB_jb_kA_k$, $b_jA_ja_kB_k$, $b_jB_ja_kA_k$
+
+Before proceeding further, we can notice that the result remains unchanged when j and k are swapped (Since both terms just become their own negatives and result in the same positive sum).
+
+The limit $1 \leq j , k \leq n$ = $(1 \leq j < k \leq n) + (1 \leq j = k \leq n) + (1 \leq k < j \leq n)$
+
+If we take the given sum as $S_{j,k}$, we can split the sum according to the previous step. When j = k, all the individual terms become 0 and the 1st and 3rd terms are equal to each other.
+
+So we get : $\sum\limits_{1 \leq j,k \leq n}^{} S_{j,k} = 2 \sum\limits_{1 \leq j < k \leq n}^{} S_{j,k}$
+
+{\bf 7. }The first term can be re-written in the following way :
+\begin{equation}\label{eq2}
+  \begin{split}
+     \sum\limits_{1 \leq j < k \leq n}^{} a_jA_jb_kB_k & = \sum\limits_{j=1}^{n}\sum\limits_{k=1}^{n} {a_jA_jb_kB_k} \\
+     & = (\sum\limits_{j=1}^{n}{a_jA_j}) (\sum\limits_{k=1}^{n} {b_kB_k})\\
+     & = (\sum\limits_{k=1}^{n}{a_kA_k}) (\sum\limits_{k=1}^{n} {b_kB_k})
+  \end{split}
+\end{equation}
+
+{\bf 8. }The second term can be re-written in the following way :
+\begin{equation}\label{eq2}
+  \begin{split}
+     \sum\limits_{1 \leq j < k \leq n}^{} a_jB_jb_kA_k & = \sum\limits_{j=1}^{n}\sum\limits_{k=1}^{n} {a_jB_jb_kA_k} \\
+     & = (\sum\limits_{j=1}^{n}{a_jB_j}) (\sum\limits_{k=1}^{n} {b_kA_k})\\
+     & = (\sum\limits_{k=1}^{n}{a_kB_k}) (\sum\limits_{k=1}^{n} {b_kA_k})
+  \end{split}
+\end{equation}
+
+{\bf 9. }The third term can be re-written in the following way :
+\begin{equation}\label{eq2}
+  \begin{split}
+     \sum\limits_{1 \leq j < k \leq n}^{} b_jA_ja_kB_k & = \sum\limits_{j=1}^{n}\sum\limits_{k=1}^{n} {b_jA_ja_kB_k} \\
+     & = (\sum\limits_{j=1}^{n}{b_jA_j}) (\sum\limits_{k=1}^{n} {a_kB_k})\\
+     & = (\sum\limits_{k=1}^{n}{b_kA_k}) (\sum\limits_{k=1}^{n} {a_kB_k})
+  \end{split}
+\end{equation}
+
+{\bf 10. }The fourth term can be re-written in the following way :
+\begin{equation}\label{eq2}
+  \begin{split}
+     \sum\limits_{1 \leq j < k \leq n}^{} b_jB_ja_kA_k & = \sum\limits_{j=1}^{n}\sum\limits_{k=1}^{n} {b_jB_ja_kA_k} \\
+     & = (\sum\limits_{j=1}^{n}{b_jB_j}) (\sum\limits_{k=1}^{n} {a_kA_k})\\
+     & = (\sum\limits_{k=1}^{n}{b_kB_k}) (\sum\limits_{k=1}^{n} {a_kA_k})
+  \end{split}
+\end{equation}
+
+{\bf 11. } The 1st term = last term and the middle two terms are equal, so the final combination of the 4 sums results in :
+
+$2(\sum\limits_{k=1}^{n}{a_kA_k}) (\sum\limits_{k=1}^{n} {b_kB_k}) - 2(\sum\limits_{k=1}^{n}{a_kB_k}) (\sum\limits_{k=1}^{n} {b_kA_k})$
+
+This is the result for the limits : $1 \leq j , k \leq n$. To get the result for $1 \leq j < k \leq n$, we can just divide the result obtained above by 2. Thus the final required result is : $(\sum\limits_{k=1}^{n}{a_kA_k}) (\sum\limits_{k=1}^{n} {b_kB_k}) - (\sum\limits_{k=1}^{n}{a_kB_k}) (\sum\limits_{k=1}^{n} {b_kA_k})$
+
+\medskip
+\medskip
+
+\noindent
+{\bf Problem 2.27}
+
+\textit {Solution :}
+
+{\bf 1. } To begin, we see that ${\Delta (c^{\underline{x}})} = {(c^{\underline{x+1}})} - {(c^{\underline{x}})}$  (From the definition of $\delta$ in the book)
+
+{\bf 2. } By the $m^{th}$ power rule, we also get : $ {(c^{\underline{x}})} = c(c-1)(c-2)...(c-x+1) $
+
+{\bf 3. } By the $m^{th}$ power rule again, we get : $ {(c^{\underline{x+1}})} = c(c-1)(c-2)...(c-x+1)(c-x) $
+
+{\bf 4. } By the $m^{th}$ power rule again, we get : $ {(c^{\underline{x+2}})} = c(c-1)(c-2)...(c-x+1)(c-x)(c-x-1) $
+
+{\bf 5. } Subtracting, we get : $ c(c-1)(c-2)...(c-x+1)(c-x) - c(c-1)(c-2)...(c-x+1) $
+
+{\bf 6. } Solving for this equation:
+\begin{equation}\label{eq3}
+  \begin{split}
+     c(c-1)...(c-x+1)(c-x) - c(c-1)...(c-x+1) & = c(c-1)...(c-x+1)((c-x) - 1) \\
+     & = c(c-1)...(c-x+1)(c-x-1) \\
+     & = c...(c-x-1)((c-x)/(c-x)) \\
+     & = {(c^{\underline{x+2}})} / (c-x)
+  \end{split}
+\end{equation}
+
+Which is the required result
+
+{\bf 7. } To calculate $\sum\limits_{k=1}^{n} ((-2)^k/k)$, we substitute $c=-2$ and $x=x-2$
+\begin{equation}\label{eq3}
+  \begin{split}
+     \Delta((-2)^k/k) & =  \frac{(-2)^{\underline{(x-2)+2}}}{(-2 - (x-2))}\\
+     & = \frac{(-2)^{\underline{x}}}{-x}
+  \end{split}
+\end{equation}
+
+{\bf 8. } We know that $ \sum\limits_{k=1}^{n} ((-2)^k/k) = \sum\limits_{k=1}^{n+1} ((-2)^k/k)(\delta k) $
+
+{\bf 9. } Solving for the previous equation :
+\begin{equation}\label{eq4}
+  \begin{split}
+     \sum\limits_{k=1}^{n+1} ((-2)^k/k)(\delta k) & = (-(-2)^{k-2})\mid_{1}^{n+1} \\
+     & = {-(-2)^{\underline{n-1}}} - {-(-2)^{\underline{-1}}} \\
+     & = {(-2)^{\underline{-1}}} - {(-2)^{\underline{n-1}}}\\
+     & = {\frac{1}{-2+1}} - {(-2)^{\underline{n-1}}}\\
+     & = -1 - ((-2)(-2-1)...(-2-(n-2)))\\
+     & = -1 + ((-1)(-2)(-3)...(-n))\\
+     & = -1 + (-1)^nn!
+  \end{split}
+\end{equation}
+
+Which is the required result
+
+\medskip
+\medskip
+
+\noindent
+{\bf Problem 4.16}
+
+\textit {Solution :}
+
+{\bf 1. } The reciprocal of a Euclid number is : $\frac{1}{e_n}$
+
+{\bf 2. } From the recurrence relation given in the book, we know that $e_n = e_{n-1} (e_{n-1} -1) + 1$
+
+{\bf 3. } Following the previous statement, we also have $e_{n+1} = e_{n} (e_{n} -1) + 1$
+
+{\bf 4. } Solving for the previous equation we have,
+\begin{equation}\label{eq4}
+  \begin{split}
+     e_{n+1} & = e_{n} (e_{n} -1) + 1 \\
+     e_{n+1} - 1 & = e_{n} (e_{n} -1) , Now\,taking\,the\,reciprocals\\
+     \frac{1}{e_{n+1} - 1} & = \frac{1}{e_{n} (e_{n} -1)} - 1\\
+     & = {\frac{1}{e_{n} -1}} - {\frac{1}{e_{n}}}\\
+     {\frac{1}{e_{n}}} & = {\frac{1}{e_{n} -1}} - {\frac{1}{e_{n+1} - 1}}\\
+  \end{split}
+\end{equation}
+
+We see that this form for the term will give us an oscillating series when we sum it
+
+{\bf 5. } Summing it we get $\sum_{k=1}^{k=n} {{\frac{1}{e_{k} -1}} - {\frac{1}{e_{k+1} - 1}}}$
+
+{\bf 6. } Except for the first and last terms all cancel each other out, and we are left with
+
+${\frac{1}{e_1-1}} - {\frac{1}{e_{n+1}-1}}$
+
+$= {\frac{1}{2-1}} - {\frac{1}{e_{n+1}-1}}$
+
+$= {1} - {\frac{1}{e_{n+1}-1}}$
+
+Which is the required result.
+
+\medskip
+\medskip
+
+\noindent
+{\bf Problem 4.24}
+
+\textit {Solution :}
+
+{\bf 1. } We know that $\epsilon_p(n!) = {\lfloor \frac{n}{p} \rfloor} + {\lfloor \frac{n}{p^2} \rfloor} + .... = \sum_{k\geq 1}^{} \lfloor \frac{n}{p^k} \rfloor$
+
+{\bf 2. } Also, $\nu_p(n)$ is the sum of digits in the 'p-base' representation of n.
+
+{\bf 3. } We can assume the p-base representation of n to be of the form $a_xa_{x-1}...a_0$ , which is similar to a binary representation of the number.
+
+{\bf 4. } Therefore, $n = a_xp^x+...+a_1p+a_0$ in base p
+
+{\bf 5. } Dividing a term by $p^i$, we get : ${\lfloor \frac{n}{p^i} \rfloor} = {a_xp^{x-i}} + ...+a_{i+1}p + a_i$ (from its definition) 
+
+{\bf 6. } The sum mentioned in step 1 becomes : 
+
+\begin{equation}\label{eq4}
+  \begin{split}
+     \sum_{k=1}^{x} ({a_xp^{x-k}} + ...+ a_{i+1}p + a_i) & = \sum_{k=1}^{x} \sum_{j=i}^{x} a_jp^{j-i}\\
+     & = \sum_{j=i}^{x}\sum_{k=1}^{x} a_jp^{j-i} \\
+     & = \sum_{j=i}^{x} n_j \frac{p^j-1}{p-1}\\
+     & = \frac{1}{p-1} {\sum_{j=1}^{x} (n_jp^j - n_j)}\\
+     & = \frac{1}{p-1} {\sum_{j=0}^{x} (n_jp^j - n_j)}\\
+     & = \frac{1}{p-1} (n-\nu_p(n))          
+  \end{split}
+\end{equation}
+
+In the previous set of equations, the 2nd last step is done because adding j=0 will result in no extra addition to the final sum but helps us get the term $a_0$. 
+
+This is the required result.
+
+\medskip
+\medskip
+
+\noindent
+{\bf Problem 4.26}
+
+\textit {Solution :} 
+
+If we notice the terms given, we have terms which are obtained by adding the two adjacent terms, eg. {0/1 and 1/9 result in 1/10}. This is basically the construction of a Stern-Brocot tree. The given function representing the terms is just a subtree of the Stern-Brocot tree and within that tree for m/n preceding m'/n', m'n-mn' = 1.
+
+\medskip
+\medskip
+
+\noindent
+{\bf Problem 4.30}
+
+Was unable to solve this problem after trying.
+
+\medskip
+
+\noindent
+{\bf Problem 4.38}
+
+Was unable to solve this problem after trying.
+
+\medskip
+\medskip
+
+\noindent
+{\bf Problem 4.42}
+
+\textit {Solution :} 
+
+{\bf 1. } We know that $k\bot m$ and $k\bot n$ $\Longleftrightarrow$ $k\bot mn$
+
+{\bf 2. } Also, if $k\bot m$, then $k\bot m+xk$. This follows from the fact that gcd(a,b) = gcd(a,b+ax)
+
+{\bf 3. } So $m \bot n$ and $n' \bot n$ $\Longleftrightarrow$ $n \bot mn'$
+
+{\bf 4. } Using the relation in step two we also get $n \bot mn' + nm'$ (where nm' is a multiple of n)
+
+{\bf 5. } Also, $m' \bot n'$ and $n' \bot n$ $\Longleftrightarrow$ $n' \bot m'n$
+
+{\bf 6. } Using the relation in step two we also get $n' \bot mn' + nm'$ (where nm' is a multiple of n)
+
+{\bf 7. } Combining steps 4 and 6, we get $nn' \bot mn' + nm'$
+
+{\bf 8. } This shows us that the result that we get from adding the two fractions, ie. {$\frac{mn'+nm'}{nn'}$} is in its reduced form as the numerator and denominator are relatively prime as show above. Therefore the denominator is $nn'$.
+
+This is the required result.
+
+\end{document}
+
+
+
+
+
+
+
+
